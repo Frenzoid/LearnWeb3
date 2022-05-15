@@ -22,7 +22,8 @@ async function connectWallet() {
     // Get the contract.
     const signer = provider.getSigner();
     moodContract = new ethers.Contract(moodDiaryMeta.output.address, moodDiaryMeta.output.abi, signer);
-
+	
+	// Call getMood.
     getMood();
 }
 
@@ -33,12 +34,13 @@ window.ethereum.on('accountsChanged', async () => {
 });
 
 window.ethereum.on('networkChanged', async () => {
+	// I bet theres a proper way of updating the provider with the current network.
     provider = new ethers.providers.Web3Provider(window.ethereum);
     await checkNetwork();
 });
 
 
-// Main button functions
+// Main button functions.
 async function getMood() {
     const mood = await moodContract.getMood();
     document.getElementById("get_mood").innerText = mood;
@@ -52,7 +54,7 @@ async function setMood() {
 }
 
 
-// Helper function
+// Helper functions.
 async function checkNetwork() {
     const { name } = await provider.getNetwork();
     console.log(name);
