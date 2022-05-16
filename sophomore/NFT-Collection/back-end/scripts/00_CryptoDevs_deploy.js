@@ -1,9 +1,9 @@
 
-const hre = require("hardhat");
+const { ethers } = require("hardhat");
 const { WHITELIST_CONTRACT_ADDRESS, METADATA_URL } = require("../constants");
 
 async function main() {
-  const CryptoDevs = await hre.ethers.getContractFactory("CryptoDevs");
+  const CryptoDevs = await ethers.getContractFactory("CryptoDevs");
   const cryptoDevs = await CryptoDevs.deploy(METADATA_URL, WHITELIST_CONTRACT_ADDRESS);
 
   await cryptoDevs.deployed();

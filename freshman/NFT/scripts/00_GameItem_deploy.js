@@ -1,10 +1,10 @@
-const hre = require("hardhat");
+const { ethers } = require("hardhat");
 
 async function main() {
 
 
   // We get the contract to deploy
-  const GameItem = await hre.ethers.getContractFactory("GameItem");
+  const GameItem = await ethers.getContractFactory("GameItem");
   const gameItem = await GameItem.deploy();
 
   await gameItem.deployed();
