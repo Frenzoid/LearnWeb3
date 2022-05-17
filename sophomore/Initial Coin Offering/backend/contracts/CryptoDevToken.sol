@@ -52,6 +52,7 @@ contract CryptoDevToken is ERC20, Ownable {
             (totalSupply() + amountWithDecimals) <= maxTotalSupply,
             "Exceeds the max total supply available."
         );
+
         // call the internal function from Openzeppelin's ERC20 contract
         _mint(msg.sender, amountWithDecimals);
     }
@@ -84,6 +85,7 @@ contract CryptoDevToken is ERC20, Ownable {
                 tokenIdsClaimed[tokenId] = true;
             }
         }
+
         // If all the token Ids have been claimed, revert the transaction;
         require(amount > 0, "You have already claimed all the tokens");
 
