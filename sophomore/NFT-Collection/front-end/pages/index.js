@@ -3,8 +3,10 @@ import Head from "next/head";
 import React, { useEffect, useRef, useState } from "react";
 import Web3Modal from "web3modal";
 
+
 import { ABI, NFT_CONTRACT_ADDRESS } from "../constants";
 import styles from "../styles/Home.module.css";
+
 
 export default function Home() {
   // walletConnected keep track of whether the user's wallet is connected or not
@@ -274,21 +276,21 @@ export default function Home() {
 
     // Connect to Metamask
     // Since we store `web3Modal` as a reference, we need to access the `current` value to get access to the underlying object
-    const provider = await web3ModalRef.current.connect();
-    const web3Provider = new providers.Web3Provider(provider);
+    const instance = await web3ModalRef.current.connect();
+    const provider = new providers.Web3Provider(instance);
 
     // If user is not connected to the Rinkeby network, let them know and throw an error
-    const { chainId } = await web3Provider.getNetwork();
+    const { chainId } = await provider.getNetwork();
     if (chainId !== 4) {
       window.alert("Change the network to Rinkeby");
       throw new Error("Change network to Rinkeby");
     }
 
     if (needSigner) {
-      const signer = web3Provider.getSigner();
+      const signer = provider.getSigner();
       return signer;
     }
-    return web3Provider;
+    return provider;
   };
 
   // useEffects are used to react to changes in state of the website
