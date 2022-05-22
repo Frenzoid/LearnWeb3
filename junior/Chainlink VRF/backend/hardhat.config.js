@@ -21,7 +21,6 @@ task("balance", "Prints an account's balance")
     console.log(formatUnits(balance, "ether"), "ETH");
   });
 
-
 // List of networks (npx hardhat run script/deploy_script.js --network <network-name>)
 /**
  * @type import('hardhat/config').HardhatUserConfig
